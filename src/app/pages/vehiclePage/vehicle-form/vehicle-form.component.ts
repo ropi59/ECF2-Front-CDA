@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Vehicle} from "../../../models/vehicles.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {VehiclesService} from "../../../services/vehicles.service";
@@ -10,10 +10,10 @@ import {VehicleListComponent} from "../vehicle-list/vehicle-list.component";
   styleUrls: ['./vehicle-form.component.scss']
 })
 export class VehicleFormComponent implements OnInit {
-  newvehicle!: Vehicle;
+  @Input() vehicle!: Vehicle;
 
   formVehicle : FormGroup = this.formBuilder.group({
-    type: '',
+    genre: '',
     brand: '',
     model: '',
     immat: '',
@@ -27,14 +27,30 @@ export class VehicleFormComponent implements OnInit {
               private vehicleList : VehicleListComponent) { }
 
   ngOnInit(): void {
+    this.formVehicle.patchValue({
+      genre: this.vehicle.genre,
+      brand: this.vehicle.brand,
+      model: this.vehicle.model,
+      immat: this.vehicle.immat,
+      state: this.vehicle.state,
+      price: this.vehicle.price,
+      disponibility: this.vehicle.disponibility
+    })
   }
 
   submit(){
-    this.vehicleService.addVehicle(this.formVehicle.value)
+    if (this.vehicleList.newVehicle){
+      this.vehicleService.addVehicle(this.formVehicle.value)
+    } else {
+      this.vehicleService.updateVehicle(this.formVehicle.value, this.vehicle.id)
+    }
+    this.cancel();
+
   }
 
   cancel(){
     this.vehicleList.cancelNewVehicle()
+    this.vehicleList.cancelUpdateVehicle();
   }
 
 }

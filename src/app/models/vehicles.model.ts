@@ -1,6 +1,6 @@
 export class Vehicle {
   id!:number;
-  type!: string;
+  genre!: string;
   brand!: string;
   model!: string;
   immat!: string;
@@ -9,9 +9,9 @@ export class Vehicle {
   disponibility!: string;
   vehiclePic!: string;
 
-  constructor(id:number, type: string, brand: string, model: string, immat: string, state: string, price: number, disponibility: string, vehiclePic: string){
+  constructor(id:number, genre: string, brand: string, model: string, immat: string, state: string, price: number, disponibility: string, vehiclePic: string){
     this.id = id;
-    this.type = type;
+    this.genre = genre;
     this.brand = brand;
     this.model = model;
     this.immat = immat;
@@ -29,12 +29,12 @@ export class Vehicle {
     this.id = id;
   }
 
-  getType(){
-    return this.type;
+  getGenre(){
+    return this.genre;
   }
 
-  setType(type: string){
-    this.type = type;
+  setGenre(genre: string){
+    this.genre = genre;
   }
 
   getBrand(){

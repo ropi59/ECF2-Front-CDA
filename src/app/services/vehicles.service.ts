@@ -1,17 +1,17 @@
 import {Injectable} from "@angular/core";
-import {User} from "../models/users.model";
 import {Vehicle} from "../models/vehicles.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehiclesService{
+  vehicleUpdated!: Vehicle;
   vehicles: Vehicle[] = [
     new Vehicle(1, "car", "Peugeot", "508 SW", "FT-548-RS", "B", 59, "Disponible","./assets/vehicles/508.png"),
     new Vehicle(2, "car", "Ferrari", "LaFerrari", "LA-738-RI", "A", 179, "Disponible","./assets/vehicles/laferrari.png"),
     new Vehicle(3, "car", "Cadillac", "Escalade", "ES-414-DE", "D", 149, "Indisponible","./assets/vehicles/escalade.png"),
     new Vehicle(4, "car", "Aixam", "CityGo", "PY-111-RS", "B", 9, "Disponible","./assets/vehicles/aixam.png"),
-    new Vehicle(5, "motorcycle", "Suzuki", "GSXR-1000", "GS-564-XR", "A", 39, "Disponible","./assets/vehicles/gsxr1000.jfif"),
+    new Vehicle(5, "motorcycle", "Suzuki", "GSXR-1000", "GS-564-XR", "A", 39, "Disponible","./assets/vehicles/gsxr1000.png"),
     new Vehicle(6, "motorcycle", "Harley-Davidson", "SPORTSTER-S", "FT-548-RS", "A", 49, "Indisponible","./assets/vehicles/sportster-s.png"),
     new Vehicle(7, "truck", "Tesla", "Semi-truck", "TS-758-LA", "A", 449, "Disponible","./assets/vehicles/semiTesla.png"),
     new Vehicle(8, "utility", "Fiat", "Ducato", "DU-547-TO", "C", 119, "Indisponible","./assets/vehicles/ducato.png"),
@@ -38,5 +38,16 @@ export class VehiclesService{
 
   deleteById(vehicleId : number) : void {
     this.vehicles.splice(vehicleId - 1, 1);
+  }
+
+  updateVehicle(vehicleToUpdate: Vehicle, vehicleId: number){
+    this.vehicleUpdated = (this.getVehicleById(vehicleId));
+    this.vehicleUpdated.setGenre(vehicleToUpdate.genre);
+    this.vehicleUpdated.setBrand(vehicleToUpdate.brand);
+    this.vehicleUpdated.setModel(vehicleToUpdate.model);
+    this.vehicleUpdated.setImmat(vehicleToUpdate.immat);
+    this.vehicleUpdated.setState(vehicleToUpdate.state);
+    this.vehicleUpdated.setPrice(vehicleToUpdate.price);
+    this.vehicleUpdated.setDisponibility(vehicleToUpdate.disponibility)
   }
 }

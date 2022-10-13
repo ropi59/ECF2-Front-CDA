@@ -3,8 +3,7 @@
     <form (ngSubmit)="submit()" [formGroup]="formVehicle">
       <div>
         <label>Type</label>
-        <select formControlName="type">
-          <option value="">Choisissez un type</option>
+        <select formControlName="genre">
           <option value="car">Voiture</option>
           <option value="motorcycle">Moto</option>
           <option value="truck">Camion</option>
@@ -25,8 +24,7 @@
       </div>
       <div>
         <label>Etat</label>
-        <select formControlName="type">
-          <option value="">Choisissez l'état du véhicule</option>
+        <select formControlName="state">
           <option value="A">A</option>
           <option value="B">B</option>
           <option value="C">C</option>
@@ -40,7 +38,6 @@
       <div>
         <label>Disponibilité</label>
         <select formControlName="disponibility">
-          <option value="">Véhicule Disponible?</option>
           <option value="Disponible">Disponible</option>
           <option value="Indisponible">Indisponible</option>
         </select>

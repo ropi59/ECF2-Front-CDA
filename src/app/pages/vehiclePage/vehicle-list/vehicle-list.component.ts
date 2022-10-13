@@ -8,6 +8,7 @@ import {VehiclesService} from "../../../services/vehicles.service";
   styleUrls: ['./vehicle-list.component.scss']
 })
 export class VehicleListComponent implements OnInit {
+  vehicle!: Vehicle;
   vehicles!: Vehicle[];
   newVehicle!: boolean;
   updateVehicle!: boolean;
@@ -24,13 +25,17 @@ export class VehicleListComponent implements OnInit {
     this.newVehicle = true;
   }
 
-  modifyUser(userId : number){
-    this.updateVehicle = true;
-
-  }
-
   cancelNewVehicle() {
     this.newVehicle = false;
   }
 
+  modifyVehicle(vehicleId : number){
+    this.updateVehicle = true;
+    this.vehicle = this.vehicleService.getVehicleById(vehicleId)
+
+  }
+
+  cancelUpdateVehicle() {
+    this.updateVehicle = false
+  }
 }

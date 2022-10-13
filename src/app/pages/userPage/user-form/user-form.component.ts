@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup } from "@angular/forms";
 import {User} from "../../../models/users.model";
 import {UsersService} from "../../../services/users.service";
@@ -11,7 +11,7 @@ import {UserListComponent} from "../user-list/user-list.component";
 })
 
 export class UserFormComponent implements OnInit {
-    newUser!: User;
+    @Input() user!: User;
 
     formUser : FormGroup = this.formBuilder.group({
     name: '',
@@ -24,11 +24,19 @@ export class UserFormComponent implements OnInit {
               private userList: UserListComponent) { }
 
   ngOnInit(): void {
-
+    this.formUser.patchValue({
+      name: this.user.name,
+      firstName: this.user.firstName,
+      email: this.user.email
+    })
   }
 
   submit(){
-      this.userService.addUser(this.formUser.value)
+      if (this.userList.newUser){
+        this.userService.addUser(this.formUser.value)
+      }else {
+       this.userService.updateUser(this.formUser.value, this.user.id);
+      }
       this.cancel();
   }
 
@@ -36,5 +44,8 @@ export class UserFormComponent implements OnInit {
     this.userList.cancelNewClient();
     this.userList.cancelUpdateClient();
   }
+
+
+
 
 }

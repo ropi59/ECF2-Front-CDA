@@ -5,6 +5,7 @@ import {User} from "../models/users.model";
   providedIn: 'root'
 })
 export class UsersService{
+  userUpdated!: User;
   users: User[] = [
     new User(1, "Archer", "Mallory", "mallory.archer@mail.com"),
     new User(2, "Archer", "Sterling", "sterling.archer@mail.com"),
@@ -34,7 +35,10 @@ export class UsersService{
     this.users.splice(userId - 1, 1);
   }
 
-  updateUser(userId: number) {
-    console.log(this.getUserById(userId))
+  updateUser(userToUpdate: User, userId: number){
+    this.userUpdated = (this.getUserById(userId));
+    this.userUpdated.setName(userToUpdate.name);
+    this.userUpdated.setFirstName((userToUpdate.firstName));
+    this.userUpdated.setEmail(userToUpdate.email)
   }
 }

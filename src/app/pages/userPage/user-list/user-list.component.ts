@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../../models/users.model";
 import {UsersService} from "../../../services/users.service";
-import {UserFormComponent} from "../user-form/user-form.component";
 
 @Component({
   selector: 'app-user-list',
@@ -9,12 +8,12 @@ import {UserFormComponent} from "../user-form/user-form.component";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  user!: User;
   users!: User[];
   newUser!: boolean;
   updateUser!: boolean;
 
-  constructor(private userService: UsersService,
-              private userForm: UserFormComponent) { }
+  constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
     this.newUser = false;
@@ -30,8 +29,9 @@ export class UserListComponent implements OnInit {
     this.newUser = false;
   }
 
-  modifyUser(userId: number) {
+  modifyUser(userId: number){
     this.updateUser = true;
+    this.user = this.userService.getUserById(userId);
   }
 
   cancelUpdateClient() {

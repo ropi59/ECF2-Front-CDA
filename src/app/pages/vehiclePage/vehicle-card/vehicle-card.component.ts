@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Vehicle} from "../../../models/vehicles.model";
-import {UsersService} from "../../../services/users.service";
-import {UserListComponent} from "../../userPage/user-list/user-list.component";
 import {VehiclesService} from "../../../services/vehicles.service";
 import {VehicleListComponent} from "../vehicle-list/vehicle-list.component";
 
@@ -24,6 +22,6 @@ export class VehicleCardComponent implements OnInit {
   }
 
   modifyVehicle() {
-    this.vehicleList.modifyUser(this.vehicle.id)
+    this.vehicleList.modifyVehicle(this.vehicle.id)
   }
 }
