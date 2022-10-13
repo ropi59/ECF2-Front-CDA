@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import * as fr from '@angular/common/locales/fr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { UserFormComponent } from './pages/userPage/user-form/user-form.component';
 import { VehicleCardComponent } from './pages/vehiclePage/vehicle-card/vehicle-card.component';
 import { VehicleFormComponent } from './pages/vehiclePage/vehicle-form/vehicle-form.component';
+import {registerLocaleData} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,13 @@ import { VehicleFormComponent } from './pages/vehiclePage/vehicle-form/vehicle-f
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    registerLocaleData(fr.default)
+  }
+}

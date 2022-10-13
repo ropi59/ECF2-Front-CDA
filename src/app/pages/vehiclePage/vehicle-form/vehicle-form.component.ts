@@ -12,6 +12,9 @@ import {VehicleListComponent} from "../vehicle-list/vehicle-list.component";
 export class VehicleFormComponent implements OnInit {
   @Input() vehicle!: Vehicle;
 
+  /**
+   * Création du formulaire pour les véhicules
+   */
   formVehicle : FormGroup = this.formBuilder.group({
     genre: '',
     brand: '',
@@ -27,6 +30,9 @@ export class VehicleFormComponent implements OnInit {
               private vehicleList : VehicleListComponent) { }
 
   ngOnInit(): void {
+    /**
+     * Prérempli le formulaire lorsque l'on veut modifier un véhicule
+     */
     this.formVehicle.patchValue({
       genre: this.vehicle.genre,
       brand: this.vehicle.brand,
@@ -38,6 +44,9 @@ export class VehicleFormComponent implements OnInit {
     })
   }
 
+  /**
+   *  Demande au service de traiter le contenu du formulaire à la validation
+   */
   submit(){
     if (this.vehicleList.newVehicle){
       this.vehicleService.addVehicle(this.formVehicle.value)
@@ -48,6 +57,9 @@ export class VehicleFormComponent implements OnInit {
 
   }
 
+  /**
+   * cache l'affichage du formulaire
+   */
   cancel(){
     this.vehicleList.cancelNewVehicle()
     this.vehicleList.cancelUpdateVehicle();

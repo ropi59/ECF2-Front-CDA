@@ -13,7 +13,10 @@ import {UserListComponent} from "../user-list/user-list.component";
 export class UserFormComponent implements OnInit {
     @Input() user!: User;
 
-    formUser : FormGroup = this.formBuilder.group({
+  /**
+   * Création du formulaire pour les clients
+   */
+  formUser : FormGroup = this.formBuilder.group({
     name: '',
     firstName: '',
     email: ''
@@ -24,6 +27,9 @@ export class UserFormComponent implements OnInit {
               private userList: UserListComponent) { }
 
   ngOnInit(): void {
+    /**
+     * Prérempli le formulaire en cas de mise à jour d'un client
+     */
     this.formUser.patchValue({
       name: this.user.name,
       firstName: this.user.firstName,
@@ -31,6 +37,9 @@ export class UserFormComponent implements OnInit {
     })
   }
 
+  /**
+   *  Demande au service de traiter le contenu du formulaire à la validation
+   */
   submit(){
       if (this.userList.newUser){
         this.userService.addUser(this.formUser.value)
@@ -40,6 +49,9 @@ export class UserFormComponent implements OnInit {
       this.cancel();
   }
 
+  /**
+   * cache l'affichage du formulaire
+   */
   cancel() {
     this.userList.cancelNewClient();
     this.userList.cancelUpdateClient();

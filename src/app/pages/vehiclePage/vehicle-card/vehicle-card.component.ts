@@ -17,10 +17,16 @@ export class VehicleCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Demande au service de supprimer un véhicule par son id
+   */
   deleteVehicle() {
     this.vehicleService.deleteById(this.vehicle.id)
   }
 
+  /**
+   * Demande au service de modifier un véhicule par son id
+   */
   modifyVehicle() {
     this.vehicleList.modifyVehicle(this.vehicle.id)
   }

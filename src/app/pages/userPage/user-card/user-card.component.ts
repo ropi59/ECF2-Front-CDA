@@ -17,10 +17,15 @@ export class UserCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * methode pour envoyer l'id de l'utilisateur au service en vue de le supprimer
+   */
   deleteUser() {
     this.userService.deleteById(this.user.id)
   }
-
+  /**
+   * methode pour envoyer l'id de l'utilisateur au service en vue de le modifier
+   */
   modifyUser() {
     this.userList.modifyUser(this.user.id);
   }

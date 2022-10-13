@@ -9,6 +9,18 @@ export class Vehicle {
   disponibility!: string;
   vehiclePic!: string;
 
+  /**
+   * Constructeur d'un véhicule
+   * @param id id du véhicule
+   * @param genre type du véhicule : moto | voiture | camion | utilitaire
+   * @param brand marque du véhicule
+   * @param model modèle du véhicule
+   * @param immat immatriculation du véhicule
+   * @param state état du véhicule : A | B | C | D
+   * @param price prix de la location à la journée
+   * @param disponibility disponibilité du véhicule
+   * @param vehiclePic photo du véhicule
+   */
   constructor(id:number, genre: string, brand: string, model: string, immat: string, state: string, price: number, disponibility: string, vehiclePic: string){
     this.id = id;
     this.genre = genre;
@@ -21,6 +33,7 @@ export class Vehicle {
     this.vehiclePic = vehiclePic;
   }
 
+  //Getters setters
   getId(){
     return this.id;
   }

@@ -4,6 +4,13 @@ export class User {
   firstName!: string;
   email!: string;
 
+  /**
+   * Contructeur d'un client
+   * @param id id du client
+   * @param name nom du client
+   * @param firstName prénom du client
+   * @param email mail du client
+   */
   constructor(id: number, name: string, firstName: string, email: string){
     this.id = id;
     this.name = name;
@@ -11,6 +18,7 @@ export class User {
     this.email = email;
   }
 
+  //Getters setters
   getId() {
     return this.id;
   }

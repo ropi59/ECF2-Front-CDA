@@ -11,6 +11,9 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    /**
+     * Lien vers le logo de Localib
+     */
     this.logoSrc = "./assets/localib.png";
   }
 
