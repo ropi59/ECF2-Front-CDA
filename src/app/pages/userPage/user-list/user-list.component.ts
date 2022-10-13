@@ -32,6 +32,7 @@ export class UserListComponent implements OnInit {
    */
   createUser() {
     this.newUser = true;
+    this.updateUser = false;
   }
 
   /**
@@ -47,6 +48,7 @@ export class UserListComponent implements OnInit {
    */
   modifyUser(userId: number){
     this.updateUser = true;
+    this.newUser = false;
     this.user = this.userService.getUserById(userId);
   }
   /**
@@ -54,5 +56,6 @@ export class UserListComponent implements OnInit {
    */
   cancelUpdateClient() {
     this.updateUser = false;
+
   }
 }

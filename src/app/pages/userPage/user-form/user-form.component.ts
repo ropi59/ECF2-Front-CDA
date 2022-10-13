@@ -13,6 +13,8 @@ import {UserListComponent} from "../user-list/user-list.component";
 export class UserFormComponent implements OnInit {
     @Input() user!: User;
 
+    formTitle!: string
+
   /**
    * Création du formulaire pour les clients
    */
@@ -35,6 +37,8 @@ export class UserFormComponent implements OnInit {
       firstName: this.user.firstName,
       email: this.user.email
     })
+
+    this.displayTitle();
   }
 
   /**
@@ -57,6 +61,16 @@ export class UserFormComponent implements OnInit {
     this.userList.cancelUpdateClient();
   }
 
+  /**
+   * change le titre du formulaire en fonction du type de formulaire demandé
+   */
+  displayTitle(){
+    if (this.userList.updateUser){
+      this.formTitle = "Modifier client"
+    }else {
+      this.formTitle = "Ajouter client"
+    }
+  }
 
 
 

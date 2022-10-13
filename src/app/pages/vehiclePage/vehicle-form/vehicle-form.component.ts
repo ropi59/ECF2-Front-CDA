@@ -12,6 +12,8 @@ import {VehicleListComponent} from "../vehicle-list/vehicle-list.component";
 export class VehicleFormComponent implements OnInit {
   @Input() vehicle!: Vehicle;
 
+  formTitle!: string
+
   /**
    * Création du formulaire pour les véhicules
    */
@@ -42,6 +44,8 @@ export class VehicleFormComponent implements OnInit {
       price: this.vehicle.price,
       disponibility: this.vehicle.disponibility
     })
+
+    this.displayTitle();
   }
 
   /**
@@ -63,6 +67,17 @@ export class VehicleFormComponent implements OnInit {
   cancel(){
     this.vehicleList.cancelNewVehicle()
     this.vehicleList.cancelUpdateVehicle();
+  }
+
+  /**
+   * change le titre du formulaire en fonction du type de formulaire demandé
+   */
+  displayTitle(){
+    if (this.vehicleList.updateVehicle){
+      this.formTitle = "Modifier véhicule"
+    }else{
+      this.formTitle = "Ajouter véhicule"
+    }
   }
 
 }

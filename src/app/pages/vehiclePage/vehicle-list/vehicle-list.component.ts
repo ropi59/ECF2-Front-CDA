@@ -32,6 +32,7 @@ export class VehicleListComponent implements OnInit {
    */
   createVehicle() {
     this.newVehicle = true;
+    this.updateVehicle = false;
   }
 
   /**
@@ -47,6 +48,7 @@ export class VehicleListComponent implements OnInit {
    */
   modifyVehicle(vehicleId : number){
     this.updateVehicle = true;
+    this.newVehicle = false;
     this.vehicle = this.vehicleService.getVehicleById(vehicleId)
 
   }
