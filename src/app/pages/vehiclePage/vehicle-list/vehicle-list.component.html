@@ -1,0 +1,8 @@
+<div class="buttonCreateContainer">
+  <button (click)="createVehicle()">Ajouter Véhicule</button>
+</div>
+<app-vehicle-form *ngIf="newVehicle == true"></app-vehicle-form>
+<app-vehicle-form *ngIf="updateVehicle == true"></app-vehicle-form>
+<div class="cardContainer">
+  <app-vehicle-card *ngFor="let vehicle of vehicles" [vehicle]="vehicle"></app-vehicle-card>
+</div>

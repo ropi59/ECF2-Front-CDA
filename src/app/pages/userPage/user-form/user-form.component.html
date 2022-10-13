@@ -1,0 +1,22 @@
+<div class="formContainer">
+  <div class="form">
+    <form (ngSubmit)="submit()" [formGroup]="formUser">
+      <div>
+        <label>Nom</label>
+        <input formControlName="name" type="text">
+      </div>
+      <div>
+        <label>Prénom</label>
+        <input formControlName="firstName" type="text">
+      </div>
+      <div>
+        <label>Email</label>
+        <input formControlName="email" type="email">
+      </div>
+      <div class="buttonContainer">
+        <button class="deleteButton" (click)="cancel()">Annuler</button>
+        <button>Valider</button>
+      </div>
+    </form>
+  </div>
+</div>
