@@ -36,7 +36,7 @@ export class User {
   }
 
   getFirstName() {
-    return this.name;
+    return this.firstName;
   }
 
   setFirstName(firstName: string){

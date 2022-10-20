@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="rentalInfo">
+    <h3>{{rental.id}}</h3>
+  </div>
+  <div class="rentalUserInfo">
+    <h3>Id: {{rental.user.id}}</h3>
+    <h3>Nom: {{rental.user.name}}</h3>
+    <h3>Prénom: {{rental.user.firstName}}</h3>
+    <h5>Email: {{rental.user.email}}</h5>
+  </div>
+  <div class="rentalCarContainer">
+    <img class="vehiclePic" [src] = "rental.vehicle.vehiclePic" [alt]="rental.vehicle.model">
+  </div>
+  <div class="rentalCarInfo">
+    <h2>{{rental.vehicle.disponibility}}</h2>
+    <h2>{{rental.vehicle.price | currency: 'EUR'}}</h2>
+    <h2>Etat : {{rental.vehicle.state}}</h2>
+  </div>
+  <div class="rentalDuration">
+    <h3>Du : {{rental.startDate | date: 'dd/MM/yyyy, à HH:mm'}}</h3>
+    <h3>au : {{rental.endDate | date: 'dd/MM/yyyy, à HH:mm'}}</h3>
+  </div>
+  <div>
+    <button (click)="modifyRental()">Modifier</button>
+    <button class="deleteButton" (click)="deleteRental()">Supprimer</button>
+  </div>
+</div>

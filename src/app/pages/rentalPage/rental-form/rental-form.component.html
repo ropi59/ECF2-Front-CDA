@@ -1,0 +1,35 @@
+<div class="formContainer">
+  <div class="form">
+    <h4>{{formTitle}}</h4>
+    <form (ngSubmit)="submit()" [formGroup]="formRental">
+      <div>
+        <label>Client</label>
+        <select formControlName="user">
+          <option value="">Choisissez un client</option>
+          <option *ngFor="let user of users">{{user.getId()}} {{user.getName()}} {{user.getFirstName()}} {{user.getEmail()}}</option>
+        </select>
+      </div>
+      <div>
+        <label>Véhicule</label>
+        <select formControlName="vehicle">
+          <option value="">Choisissez un véhicule</option>
+          <option *ngFor="let vehicle of vehicles">{{vehicle.getId()}} {{vehicle.getBrand()}} {{vehicle.getModel()}}</option>
+        </select>
+      </div>
+      <div>
+        <label>Date de début de location</label>
+        <input formControlName="startDate" type="datetime-local">
+      </div>
+      <div>
+        <label>Date de fin de location</label>
+        <input formControlName="endDate" type="datetime-local">
+      </div>
+
+      <div class="buttonContainer">
+        <button class="deleteButton" (click)="cancel()">Annuler</button>
+        <button>Valider</button>
+      </div>
+    </form>
+  </div>
+</div>
+

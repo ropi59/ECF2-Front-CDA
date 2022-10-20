@@ -30,8 +30,8 @@ export class UsersService{
   getUserById(userId: number): User {
     const user = this.users.find(user => user.id === userId);
     if (!user) {
-      throw new Error ('Client non trouvé');
-    }else {
+      throw new Error ('Client non trouvé.');
+    } else {
       return user;
     }
   }
@@ -62,6 +62,7 @@ export class UsersService{
     this.userUpdated = (this.getUserById(userId));
     this.userUpdated.setName(userToUpdate.name);
     this.userUpdated.setFirstName((userToUpdate.firstName));
-    this.userUpdated.setEmail(userToUpdate.email)
+    this.userUpdated.setEmail(userToUpdate.email);
   }
+
 }

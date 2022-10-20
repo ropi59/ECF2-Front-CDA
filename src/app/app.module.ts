@@ -13,6 +13,9 @@ import { UserFormComponent } from './pages/userPage/user-form/user-form.componen
 import { VehicleCardComponent } from './pages/vehiclePage/vehicle-card/vehicle-card.component';
 import { VehicleFormComponent } from './pages/vehiclePage/vehicle-form/vehicle-form.component';
 import {registerLocaleData} from "@angular/common";
+import { RentalListComponent } from './pages/rentalPage/rental-list/rental-list.component';
+import { RentalCardComponent } from './pages/rentalPage/rental-card/rental-card.component';
+import { RentalFormComponent } from './pages/rentalPage/rental-form/rental-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import {registerLocaleData} from "@angular/common";
     UserCardComponent,
     UserFormComponent,
     VehicleCardComponent,
-    VehicleFormComponent
+    VehicleFormComponent,
+    RentalListComponent,
+    RentalCardComponent,
+    RentalFormComponent,
   ],
   imports: [
     BrowserModule,

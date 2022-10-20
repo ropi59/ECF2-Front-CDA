@@ -43,7 +43,7 @@ export class UserListComponent implements OnInit {
   }
 
   /**
-   * Récupère un client par son ID en vu de le modifier
+   * Récupère un client par son ID en vue de le modifier
    * @param userId id du client
    */
   modifyUser(userId: number){

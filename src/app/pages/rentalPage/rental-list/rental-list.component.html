@@ -1,0 +1,8 @@
+<div class="buttonCreateContainer">
+  <button (click)="createRental()">Nouvelle location</button>
+</div>
+<app-rental-form *ngIf="newRental == true" ></app-rental-form>
+<app-rental-form *ngIf="updateRental == true" [rental]="rental" ></app-rental-form>
+<div class="cardContainer">
+  <app-rental-card *ngFor="let rental of rentals" [rental]="rental"></app-rental-card>
+</div>

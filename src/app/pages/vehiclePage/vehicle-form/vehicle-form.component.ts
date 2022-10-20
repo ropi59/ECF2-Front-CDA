@@ -12,7 +12,7 @@ import {VehicleListComponent} from "../vehicle-list/vehicle-list.component";
 export class VehicleFormComponent implements OnInit {
   @Input() vehicle!: Vehicle;
 
-  formTitle!: string
+  formTitle: string = "Ajouter véhicule";
 
   /**
    * Création du formulaire pour les véhicules
