@@ -4,12 +4,16 @@ import {UsersService} from "./users.service";
 import {VehiclesService} from "./vehicles.service";
 import {Vehicle} from "../models/vehicles.model";
 import {User} from "../models/users.model";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export  class RentalsService{
   rentalUpdated!: Rental;
+  rentals!: Rental[];
+  rental!: Rental;
 
   /**
    * Constructeur
@@ -17,53 +21,38 @@ export  class RentalsService{
    * @param vehicleService pour récupérer les véhicules
    */
   constructor(private userService: UsersService,
-              private vehicleService: VehiclesService) {
+              private vehicleService: VehiclesService,
+              private http: HttpClient) {
   }
-
-  /**
-   * Liste des locations
-   */
-  rentals: Rental[] = [
-    new Rental(1, this.userService.getUserById(1), this.vehicleService.getVehicleById(2), new Date(), new Date()),
-    new Rental(2, this.userService.getUserById(2), this.vehicleService.getVehicleById(3), new Date(), new Date()),
-    new Rental(3, this.userService.getUserById(3), this.vehicleService.getVehicleById(5), new Date(), new Date()),
-    new Rental(4, this.userService.getUserById(4), this.vehicleService.getVehicleById(8), new Date(), new Date()),
-    new Rental(5, this.userService.getUserById(2), this.vehicleService.getVehicleById(6), new Date(), new Date()),
-    new Rental(6, this.userService.getUserById(1), this.vehicleService.getVehicleById(1), new Date(), new Date()),
-  ]
 
   /**
    * Récupère toutes les locations
    */
-  getAllRentals(): Rental[]{
-    return this.rentals;
+  getAllRentals(): Observable<Rental[]>{
+    return this.http.get <Rental[]>('http://localhost:8080/rentals')
   }
 
   /**
    * Récupère une location par son id
    * @param rentalId id de la location à trouver
    */
-  getRentalById(rentalId: number): Rental {
-    const rental = this.rentals.find(rental => rental.getId() === rentalId);
-    if (!rental){
-      throw new Error('Location non trouvée.');
-    } else {
-      return rental;
-    }
+  getRentalById(rentalId: number): Observable<Rental> {
+    return this.http.get <Rental>(`http://localhost:8080/rentals/${rentalId}`)
   }
 
   /**
    * Créer une location
    * @param user le client pour la location
-   * @param vehicle le véhicule choisit
+   * @param vehicle le véhicule choisi
    * @param startDate la date de début de la location
    * @param endDate la date de fin de la location
    */
   addRental(user: User, vehicle: Vehicle, startDate: Date, endDate: Date){
-    let id = this.rentals.length + 1;
-    let rental = new Rental(id, user, vehicle, startDate, endDate);
-    this.rentals.push(rental)
-    console.log(rental)
+    this.rental.setUser(user);
+    this.rental.setVehicle(vehicle);
+    this.rental.setStartDate(startDate);
+    this.rental.setEndDate(endDate)
+    this.http.post(`http://localhost:8080/rentals`, this.rental )
   }
 
   /**
@@ -71,23 +60,24 @@ export  class RentalsService{
    * @param rentalId l'id de la location à supprimer
    */
   deleteRentalById(rentalId: number) {
-    this.rentals.splice(rentalId - 1, 1);
+    this.http.delete(`http://localhost:8080/users/${rentalId}` )
   }
 
   /**
    * Met à jour une location
    * @param user le nouveau client pour la location
-   * @param vehicle le nouveau véhicule choisit
+   * @param vehicle le nouveau véhicule choisi
    * @param startDate la nouvelle date de début
    * @param endDate la nouvelle date de fin
    * @param rentalId l'id de la location
    */
   updateRental(user: User, vehicle: Vehicle, startDate: Date, endDate: Date, rentalId: number){
-    this.rentalUpdated = (this.getRentalById(Number(rentalId)));
+    this.getRentalById(Number(rentalId)).subscribe(data => this.rentalUpdated = data);
     this.rentalUpdated.setUser(user);
     this.rentalUpdated.setVehicle(vehicle);
     this.rentalUpdated.setStartDate(startDate);
     this.rentalUpdated.setEndDate(endDate);
+    this.http.put(`http://localhost:8080/rentals/${rentalId}`, this.rentalUpdated)
   }
 
 }

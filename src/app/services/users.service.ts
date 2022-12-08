@@ -1,39 +1,32 @@
 import {Injectable} from "@angular/core";
 import {User} from "../models/users.model";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Observable} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService{
   userUpdated!: User;
-  /**
-   * Liste des clients
-   */
-  users: User[] = [
-    new User(1, "Archer", "Mallory", "mallory.archer@mail.com"),
-    new User(2, "Archer", "Sterling", "sterling.archer@mail.com"),
-    new User(3, "Dylan", "Barry", "barry.dylan@mail.com"),
-    new User(4, "Kane", "Lana", "lana.kane@mail.com"),
-  ]
+  users!: User[];
+
+  constructor(private http: HttpClient) {
+  }
 
   /**
    * Récupère tous les clients
    */
-  getAllUsers(): User[]{
-    return this.users;
+  getAllUsers(): Observable<User[]>{
+    return this.http.get <User[]>('http://localhost:8080/users')
   }
 
   /**
    * récupère un client par son id
    * @param userId id du client à trouver
    */
-  getUserById(userId: number): User {
-    const user = this.users.find(user => user.id === userId);
-    if (!user) {
-      throw new Error ('Client non trouvé.');
-    } else {
-      return user;
-    }
+  getUserById(userId: number): Observable<User> {
+    return this.http.get <User>(`http://localhost:8080/users/${userId}`)
   }
 
   /**
@@ -41,8 +34,7 @@ export class UsersService{
    * @param user les données du client à créer
    */
   addUser(user: User)  {
-    user.id = this.users.length + 1;
-    this.users.push(user)
+    this.http.post(`http://localhost:8080/users`, user )
   }
 
   /**
@@ -50,7 +42,7 @@ export class UsersService{
    * @param userId l'id du client à supprimer
    */
   deleteById(userId : number) : void {
-    this.users.splice(userId - 1, 1);
+    this.http.delete(`http://localhost:8080/users/${userId}` )
   }
 
   /**
@@ -59,10 +51,7 @@ export class UsersService{
    * @param userId l'id du client à mettre à jour
    */
   updateUser(userToUpdate: User, userId: number){
-    this.userUpdated = (this.getUserById(userId));
-    this.userUpdated.setName(userToUpdate.name);
-    this.userUpdated.setFirstName((userToUpdate.firstName));
-    this.userUpdated.setEmail(userToUpdate.email);
+    this.http.put(`http://localhost:8080/users/${userId}`, userToUpdate)
   }
 
 }
