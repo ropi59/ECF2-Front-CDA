@@ -16,6 +16,7 @@ import {registerLocaleData} from "@angular/common";
 import { RentalListComponent } from './pages/rentalPage/rental-list/rental-list.component';
 import { RentalCardComponent } from './pages/rentalPage/rental-card/rental-card.component';
 import { RentalFormComponent } from './pages/rentalPage/rental-form/rental-form.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RentalFormComponent } from './pages/rentalPage/rental-form/rental-form.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' }
