@@ -32,15 +32,15 @@ export class RentalListComponent implements OnInit {
     /**
      * Récupère la liste de toutes les locations
      */
-    this.rentals = this.rentalService.getAllRentals();
+    this.rentalService.getAllRentals().subscribe(data => this.rentals = data);
     /**
      * Récupère la liste de tous les clients
      */
-    this.users = this.userService.getAllUsers();
+    this.userService.getAllUsers().subscribe(data => this.users = data);
     /**
      * Récupère la liste de tous les vehicules
      */
-    this.vehicles = this.vehicleService.getAllVehicles();
+    this.vehicleService.getAllVehicles().subscribe(data => this.vehicles = data);
 
   }
 
@@ -66,7 +66,7 @@ export class RentalListComponent implements OnInit {
   modifyRental(rentalId: number){
     this.updateRental = true;
     this.newRental = false;
-    this.rental = this.rentalService.getRentalById(rentalId);
+    this.rentalService.getRentalById(rentalId).subscribe(data => this.rental = data);
   }
 
   /**

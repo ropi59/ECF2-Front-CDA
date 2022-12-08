@@ -36,8 +36,8 @@ export class RentalFormComponent implements OnInit {
               private vehicleService : VehiclesService) { }
 
   ngOnInit(): void {
-    this.users = this.userService.getAllUsers();
-    this.vehicles = this.vehicleService.getAllVehicles();
+    this.userService.getAllUsers().subscribe(data => this.users = data);
+    this.vehicleService.getAllVehicles().subscribe(data => this.vehicles = data);
 
     /**
      * Prérempli le formulaire en cas de mise à jour d'une location
@@ -64,11 +64,11 @@ export class RentalFormComponent implements OnInit {
       //Récupération du client
       let identity = this.formRental.controls['user'].value;
       let identityTab = identity.split(" ");
-      this.user = this.userService.getUserById(Number(identityTab[0]));
+      this.userService.getUserById(Number(identityTab[0])).subscribe(data => this.user = data);
       //Récupération du véhicule
       let vehicle = this.formRental.controls['vehicle'].value;
       let vehicleTab = vehicle.split(" ")
-      this.vehicle = this.vehicleService.getVehicleById(Number(vehicleTab[0]))
+      this.vehicleService.getVehicleById(Number(vehicleTab[0])).subscribe(data => this.vehicle = data);
       //Récupération des dates
       let startDateValue = this.formRental.controls['startDate'].value;
       let startDate = new Date(startDateValue)

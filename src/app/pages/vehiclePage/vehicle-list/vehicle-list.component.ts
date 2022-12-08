@@ -24,7 +24,7 @@ export class VehicleListComponent implements OnInit {
     /**
      * récupère la liste de tous les véhicules
      */
-    this.vehicles = this.vehicleService.getAllVehicles();
+    this.vehicleService.getAllVehicles().subscribe(data => this.vehicles = data);
   }
 
   /**
@@ -49,7 +49,7 @@ export class VehicleListComponent implements OnInit {
   modifyVehicle(vehicleId : number){
     this.updateVehicle = true;
     this.newVehicle = false;
-    this.vehicle = this.vehicleService.getVehicleById(vehicleId)
+    this.vehicleService.getVehicleById(vehicleId).subscribe(data => this.vehicle = data)
 
   }
 

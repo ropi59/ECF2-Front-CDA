@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../../models/users.model";
 import {UsersService} from "../../../services/users.service";
+import {Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-user-list',
@@ -24,7 +26,7 @@ export class UserListComponent implements OnInit {
     /**
      * récupère la liste de tous les utilisateurs
      */
-    this.users = this.userService.getAllUsers();
+    this.userService.getAllUsers().subscribe(data => this.users = data);
   }
 
   /**
@@ -49,7 +51,7 @@ export class UserListComponent implements OnInit {
   modifyUser(userId: number){
     this.updateUser = true;
     this.newUser = false;
-    this.user = this.userService.getUserById(userId);
+    this.userService.getUserById(userId).subscribe(data => this.user = data);
   }
   /**
    * masque le formulaire  de mise à jour quand on le valide ou quand on annule la saisie
