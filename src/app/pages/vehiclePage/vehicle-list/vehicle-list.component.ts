@@ -49,7 +49,7 @@ export class VehicleListComponent implements OnInit {
   modifyVehicle(vehicleId : number){
     this.updateVehicle = true;
     this.newVehicle = false;
-    this.vehicleService.getVehicleById(vehicleId).subscribe(data => this.vehicle = data)
+    this.vehicleService.getVehicleById(vehicleId);
 
   }
 

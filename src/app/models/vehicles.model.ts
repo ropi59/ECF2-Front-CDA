@@ -1,3 +1,5 @@
+import {Disponibility} from "./disponibility";
+
 export class Vehicle {
   id!:number;
   genre!: string;
@@ -6,7 +8,7 @@ export class Vehicle {
   immat!: string;
   state!: string;
   price!: number;
-  disponibility!: string;
+  disponibility!: Disponibility;
   vehiclePic!: string;
 
   /**
@@ -21,7 +23,7 @@ export class Vehicle {
    * @param disponibility disponibilité du véhicule
    * @param vehiclePic photo du véhicule
    */
-  constructor(id:number, genre: string, brand: string, model: string, immat: string, state: string, price: number, disponibility: string, vehiclePic: string){
+  constructor(id:number, genre: string, brand: string, model: string, immat: string, state: string, price: number, disponibility: Disponibility, vehiclePic: string){
     this.id = id;
     this.genre = genre;
     this.brand = brand;
@@ -94,7 +96,7 @@ export class Vehicle {
     return this.disponibility;
   }
 
-  setDisponibility(disponibility: string){
+  setDisponibility(disponibility: Disponibility){
     this.disponibility = disponibility;
   }
 

@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 })
 export class VehiclesService{
   vehicleUpdated!: Vehicle;
+  vehicle!: Vehicle;
 
   constructor(private http: HttpClient) {
   }
@@ -16,15 +17,16 @@ export class VehiclesService{
    * récupère tous les véhicules
    */
   getAllVehicles(): Observable<Vehicle[]>{
-    return this.http.get <Vehicle[]>('http://localhost:8080/vehicles')
+    return this.http.get <Vehicle[]>('http://localhost:8080/vehicles');
   }
 
   /**
    * Récupère un véhicule par son id
    * @param vehicleId l'id du véhicule à trouver
    */
-  getVehicleById(vehicleId: number): Observable<Vehicle> {
-    return this.http.get <Vehicle>(`http://localhost:8080/vehicles/${vehicleId}`)
+  getVehicleById(vehicleId: number): Vehicle {
+    this.http.get <Vehicle>(`http://localhost:8080/vehicles/${vehicleId}`).subscribe(data => this.vehicle = data);
+    return this.vehicle;
   }
 
   /**
@@ -32,15 +34,15 @@ export class VehiclesService{
    * @param vehicle le véhicule à ajouter
    */
   addVehicle(vehicle: Vehicle)  {
-    this.http.post(`http://localhost:8080/vehicles`, vehicle )
+    this.http.post(`http://localhost:8080/vehicles`, vehicle ).subscribe();
   }
 
   /**
    * Supprime un véhicule par son id
    * @param vehicleId l'id du véhicule à supprimer
    */
-  deleteById(vehicleId : number) : void {
-    this.http.delete(`http://localhost:8080/vehicles/${vehicleId}` )
+  deleteById(vehicleId : number) {
+    return this.http.delete(`http://localhost:8080/vehicles/${vehicleId}` ).subscribe();
   }
 
   /**
@@ -49,7 +51,7 @@ export class VehiclesService{
    * @param vehicleId l'id du véhicule à mettre à jour
    */
   updateVehicle(vehicleToUpdate: Vehicle, vehicleId: number){
-    this.getVehicleById(vehicleId).subscribe(data => this.vehicleUpdated = data);
+    this.vehicleUpdated = this.getVehicleById(vehicleId);
     this.vehicleUpdated.setGenre(vehicleToUpdate.genre);
     this.vehicleUpdated.setBrand(vehicleToUpdate.brand);
     this.vehicleUpdated.setModel(vehicleToUpdate.model);
@@ -57,6 +59,6 @@ export class VehiclesService{
     this.vehicleUpdated.setState(vehicleToUpdate.state);
     this.vehicleUpdated.setPrice(vehicleToUpdate.price);
     this.vehicleUpdated.setDisponibility(vehicleToUpdate.disponibility)
-    this.http.put(`http://localhost:8080/vehicles/${vehicleId}`, this.vehicleUpdated)
+    return this.http.put(`http://localhost:8080/vehicles/${vehicleId}`, this.vehicleUpdated)
   }
 }

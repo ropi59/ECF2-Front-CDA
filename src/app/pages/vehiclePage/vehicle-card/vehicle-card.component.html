@@ -1,4 +1,4 @@
-<div class="card" [ngClass]="{ cardNoDisponibility: vehicle.disponibility === 'Indisponible'}">
+<div class="card" [ngClass]="{ cardNoDisponibility: vehicle.disponibility === Disponibility}">
   <div class="leftDiv">
     <img class="vehiclePic" [src] = "vehicle.vehiclePic" [alt]="vehicle.model">
     <p>{{vehicle.immat}}</p>
@@ -8,7 +8,7 @@
     <h2>{{vehicle.model}}</h2>
     <h2>{{vehicle.brand}}</h2>
   </div>
-  <div class="rightDiv" [ngClass]="{ rightDivNoDisponibility: vehicle.disponibility === 'Indisponible'}">
+  <div class="rightDiv" [ngClass]="{ rightDivNoDisponibility: vehicle.disponibility === Disponibility}">
     <h3>{{vehicle.disponibility}}</h3>
     <h1>{{vehicle.price | currency: 'EUR'}}</h1>
     <button (click)="modifyVehicle()" >Modifier</button>

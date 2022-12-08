@@ -68,7 +68,7 @@ export class RentalFormComponent implements OnInit {
       //Récupération du véhicule
       let vehicle = this.formRental.controls['vehicle'].value;
       let vehicleTab = vehicle.split(" ")
-      this.vehicleService.getVehicleById(Number(vehicleTab[0])).subscribe(data => this.vehicle = data);
+      this.vehicleService.getVehicleById(Number(vehicleTab[0]));
       //Récupération des dates
       let startDateValue = this.formRental.controls['startDate'].value;
       let startDate = new Date(startDateValue)

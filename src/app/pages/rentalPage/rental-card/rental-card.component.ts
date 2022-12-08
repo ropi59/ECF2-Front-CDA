@@ -21,7 +21,7 @@ export class RentalCardComponent implements OnInit {
    * Methode pour envoyer l'id de la location au service en vue de la supprimer
    */
   deleteRental(){
-    this.rentalService.deleteRentalById(this.rental.id)
+    this.rentalService.deleteRentalById(this.rental.id);
   }
 
   /**

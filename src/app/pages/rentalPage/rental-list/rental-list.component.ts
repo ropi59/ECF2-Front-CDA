@@ -66,7 +66,7 @@ export class RentalListComponent implements OnInit {
   modifyRental(rentalId: number){
     this.updateRental = true;
     this.newRental = false;
-    this.rentalService.getRentalById(rentalId).subscribe(data => this.rental = data);
+    this.rentalService.getRentalById(rentalId);
   }
 
   /**

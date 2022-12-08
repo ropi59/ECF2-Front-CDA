@@ -36,12 +36,13 @@ export  class RentalsService{
    * Récupère une location par son id
    * @param rentalId id de la location à trouver
    */
-  getRentalById(rentalId: number): Observable<Rental> {
-    return this.http.get <Rental>(`http://localhost:8080/rentals/${rentalId}`)
+  getRentalById(rentalId: number): Rental {
+    this.http.get <Rental>(`http://localhost:8080/rentals/${rentalId}`).subscribe(data => this.rental = data);
+    return this.rental;
   }
 
   /**
-   * Créer une location
+   * Crée une location
    * @param user le client pour la location
    * @param vehicle le véhicule choisi
    * @param startDate la date de début de la location
@@ -60,7 +61,7 @@ export  class RentalsService{
    * @param rentalId l'id de la location à supprimer
    */
   deleteRentalById(rentalId: number) {
-    this.http.delete(`http://localhost:8080/users/${rentalId}` )
+    this.http.delete(`http://localhost:8080/users/${rentalId}`).subscribe();
   }
 
   /**
@@ -72,7 +73,7 @@ export  class RentalsService{
    * @param rentalId l'id de la location
    */
   updateRental(user: User, vehicle: Vehicle, startDate: Date, endDate: Date, rentalId: number){
-    this.getRentalById(Number(rentalId)).subscribe(data => this.rentalUpdated = data);
+    this.rentalUpdated = this.getRentalById(Number(rentalId));
     this.rentalUpdated.setUser(user);
     this.rentalUpdated.setVehicle(vehicle);
     this.rentalUpdated.setStartDate(startDate);
@@ -81,5 +82,3 @@ export  class RentalsService{
   }
 
 }
-
-

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Vehicle} from "../../../models/vehicles.model";
 import {VehiclesService} from "../../../services/vehicles.service";
 import {VehicleListComponent} from "../vehicle-list/vehicle-list.component";
+import {Disponibility} from "../../../models/disponibility";
 
 @Component({
   selector: 'app-vehicle-card',
@@ -10,6 +11,7 @@ import {VehicleListComponent} from "../vehicle-list/vehicle-list.component";
 })
 export class VehicleCardComponent implements OnInit {
   @Input() vehicle!: Vehicle;
+  Disponibility!: Disponibility;
 
   constructor(private vehicleService : VehiclesService,
               private vehicleList: VehicleListComponent) { }
@@ -27,7 +29,7 @@ export class VehicleCardComponent implements OnInit {
   /**
    * Demande au service de modifier un véhicule par son id
    */
-  modifyVehicle() {
-    this.vehicleList.modifyVehicle(this.vehicle.id)
+  modifyVehicle(){
+    this.vehicleList.modifyVehicle(this.vehicle.id);
   }
 }
