@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  netflix:
+    container_name: localib-container
+    build: .
+    ports:
+      - 8080:8080
